@@ -51,7 +51,6 @@ const deleteTask = async (req, res) => {
     } catch (error) {
         res.status(500).json({msg: error});
     }
-    res.send('all item controller');
 }
 
 module.exports = {
