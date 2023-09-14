@@ -34,8 +34,31 @@ const getTask = async (req, res) => {
     }
 }
 
-const updateTask = (req, res) => {
-    res.send('all item controller');
+const updateTask = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const task = await  Task.findOneAndUpdate(id, req.body, {new:true});
+        console.log(task)
+        if(!task){
+            return res.status(404).json({msg:` task ${id} is not found`});
+        }
+    } catch (error) {
+        
+    }
+}
+
+const editTask = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const task = await  Task.findOneAndUpdate(id, req.body, {new:true, overwrite:true});
+        console.log(task)
+
+        if(!task){
+            return res.status(404).json({msg:` task ${id} is not found`});
+        }
+    } catch (error) {
+        
+    }
 }
 
 const deleteTask = async (req, res) => {
@@ -59,4 +82,5 @@ module.exports = {
     deleteTask,
     updateTask,
     getTask,
+    editTask
 }
